@@ -1,4 +1,5 @@
 
+import numpy as np
 """
 Strong linear model in regression
     Y = X beta + eps, where eps~ N(0, sigma^2 I)
@@ -30,7 +31,28 @@ def bootstrap_sample(X, y, compute_stat, n_bootstrap=1000):
 
     ....
     """
-    pass
+    n = len(y)
+    bootstrap_statistic=np.zeros(n_bootstrap)
+
+    for i in range(n_bootstrap):
+        
+        # empty bootstrap X,y
+        X_b = np. zeros_like(X)
+        y_b = np.zeros_like(y)
+
+        # fill in these X, y
+        np.random.seed(0)
+        for j in range(n):
+            X_b[j,:] = X[np.random.rand(n),:]
+            y[j] = y[np.random.rand(n)]
+
+        # compute bootstrap statistic
+        bootstrap_statistic[i] = compute_stat(X_b,y_b)
+    
+    return bootstrap_statistic
+        
+
+
 
 def bootstrap_ci(bootstrap_stats, alpha=0.05):
     """
