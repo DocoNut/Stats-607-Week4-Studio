@@ -31,7 +31,13 @@ def bootstrap_sample(X, y, compute_stat, n_bootstrap=1000):
 
     ....
     """
+    if (not isinstance(X, np.ndarray)) or (not isinstance(y, np.ndarray)):
+        raise TypeError("X and y must be numpy ndarray")
+    
     n = len(y)
+    if X.shape[0] != n:
+        raise ValueError("the number of rows in X must match length of y")
+    
     bootstrap_statistic=np.zeros(n_bootstrap)
 
     for i in range(n_bootstrap):

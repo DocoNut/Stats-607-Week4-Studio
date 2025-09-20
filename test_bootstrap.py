@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from bootstrap import bootstrap_sample, bootstrap_ci, r_squared
+from bootstrap import bootstrap_sample, bootstrap_ci, R_squared
 
 def test_bootstrap_integration():
     """Test that bootstrap_sample and bootstrap_ci work together"""
@@ -33,8 +33,8 @@ def test_bootstrap_sample_invalid_shapes():
 
     with pytest.raises(ValueError, match="must match length of y"):
         bootstrap_sample(X, y, dummy_stat, n_bootstrap=10)
-    with pytest.raises(TypeError, match="must be numpy integer darray"):
-        bootstrap_sample(X,y, dummy_stat, n_bootstrap=10)
+    with pytest.raises(TypeError, match="must be numpy ndarray"):
+        bootstrap_sample(X, 0, dummy_stat, n_bootstrap=10)
     
 def test_bootstrap_ci():
     """Test bootstrap_sample"""
@@ -54,6 +54,11 @@ def test_R_squared():
     X=np.ones((2,3))
     y=np.ones(2)
     with pytest(ValueError, match = 'X.shape[0]'):
-        r_squared(X,y)
+        R_squared(X,y)
     with pytest(TypeError, match = 'arrays or lists'):
-        r_squared(1,'abc')
+        R_squared(1,y)
+
+if __name__ == '__main__':
+    test_bootstrap_ci()
+    test_bootstrap_sample_invalid_shapes()
+    test_R_squared()
