@@ -79,6 +79,9 @@ def bootstrap_ci(bootstrap_stats, alpha=0.05):
 
     if(not isinstance(bootstrap_stats, np.ndarray) or (not isinstance(alpha, (int,float)))):
         raise TypeError("bootstrap_stats must be numpy ndarray and alpha must be float")
+
+    if ((alpha < 0) or (alpha > 1)):
+        raise ValueError("alpha must be between 0 and 1")
         
     lower = np.percentile(bootstrap_stats, 100 * (alpha / 2))
     upper = np.percentile(bootstrap_stats, 100 * (1 - alpha / 2))
