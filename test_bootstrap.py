@@ -46,20 +46,23 @@ def test_bootstrap_ci():
     with pytest.raises(ValueError, match="alpha must be between 0 and 1"):
         bootstrap_ci(np.array([1,2,3]), alpha=1)
 
-    with pytest(TypeError, match = 'bootstrap_stats must be numpy ndarray'):
+    with pytest.raises(TypeError, match = 'bootstrap_stats must be numpy ndarray'):
         bootstrap_ci(1, alpha = 0.05)
 
 def test_R_squared():
     """test R_squared"""
-    X=np.ones((2,3))
+    X=np.ones((3,3))
     y=np.ones(2)
-    with pytest(ValueError, match = 'must match length of y'):
+    with pytest.raises(ValueError, match = 'must match length of y'):
         R_squared(X,y)
-    with pytest(TypeError, match = 'must be numpy ndarray'):
+    with pytest.raises(TypeError, match = 'must be numpy ndarray'):
         R_squared(1,y)
 
-if __name__ == '__main__':
+def integrated_test():
     test_bootstrap_ci()
     test_bootstrap_sample_invalid_shapes()
     test_R_squared()
     print("All the functions work!")
+
+if __name__ == '__main__':
+    integrated_test()
