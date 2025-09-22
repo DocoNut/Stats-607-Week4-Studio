@@ -76,6 +76,10 @@ def bootstrap_ci(bootstrap_stats, alpha=0.05):
     
     ....
     """
+
+    if(not isinstance(bootstrap_stats, np.ndarray) or (not isinstance(alpha, float)):
+        raise TypeError("bootstrap_stats must be numpy ndarray and alpha must be float")
+        
     lower = np.percentile(bootstrap_stats, 100 * (alpha / 2))
     upper = np.percentile(bootstrap_stats, 100 * (1 - alpha / 2))
     return lower, upper
@@ -102,6 +106,9 @@ def R_squared(X, y):
     """
     X = np.asarray(X)
     y = np.asarray(y)
+
+    if (not isinstance(X, np.ndarray)) or (not isinstance(y, np.ndarray)):
+        raise TypeError("X and y must be numpy ndarray")
 
     if X.shape[0] != len(y):
         raise ValueError("Number of rows in X must match length of y")
