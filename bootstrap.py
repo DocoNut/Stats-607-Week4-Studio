@@ -77,7 +77,7 @@ def bootstrap_ci(bootstrap_stats, alpha=0.05):
     ....
     """
 
-    if(not isinstance(bootstrap_stats, np.ndarray) or (not isinstance(alpha, float)):
+    if(not isinstance(bootstrap_stats, np.ndarray) or (not isinstance(alpha, (int,float)))):
         raise TypeError("bootstrap_stats must be numpy ndarray and alpha must be float")
         
     lower = np.percentile(bootstrap_stats, 100 * (alpha / 2))
