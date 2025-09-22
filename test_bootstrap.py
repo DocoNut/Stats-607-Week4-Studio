@@ -62,3 +62,4 @@ if __name__ == '__main__':
     test_bootstrap_ci()
     test_bootstrap_sample_invalid_shapes()
     test_R_squared()
+    print("All the functions work!")
